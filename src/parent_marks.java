@@ -110,7 +110,7 @@ public class parent_marks extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setRowHeight(30);
+        jTable1.setRowHeight(25);
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {

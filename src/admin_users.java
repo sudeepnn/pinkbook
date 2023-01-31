@@ -93,6 +93,7 @@ public class admin_users extends javax.swing.JFrame {
                 "FID", "NAME", "PASSWORD", "MAIL", "PHONE", "GENDER"
             }
         ));
+        jTable1.setRowHeight(25);
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 

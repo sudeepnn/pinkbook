@@ -86,6 +86,7 @@ public class teach_project extends javax.swing.JFrame {
                 "USN", "Project ID", "Project Name", "Problem", "Conclusion"
             }
         ));
+        jTable1.setRowHeight(25);
         jTable1.setShowGrid(true);
         jScrollPane3.setViewportView(jTable1);
 

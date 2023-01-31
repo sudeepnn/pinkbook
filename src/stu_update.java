@@ -289,6 +289,15 @@ public class stu_update extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+          int Year1=Integer.parseInt(String.valueOf(year.getSelectedItem()));
+        int Sem1=Integer.parseInt(String.valueOf(sem.getSelectedItem()));
+         int div=0;
+        if(Year1==1 ||  Year1==2 || Year1==3)
+            div=800;
+        else if(Year1==4 && Sem1==7)
+            div=500;
+        else if(Year1==4 && Sem1==8)
+            div=200;
         sbcode.setEditable(false);
         String Sid=sesid.getText();
          String Sbcode=sbcode.getText();
@@ -348,7 +357,7 @@ public class stu_update extends javax.swing.JFrame {
             if(rs1.next())
             {
                 Sum1=rs1.getInt(1);
-                Percentage=(Sum1/800)*100;
+                Percentage=(Sum1/div)*100;
               
             }
             

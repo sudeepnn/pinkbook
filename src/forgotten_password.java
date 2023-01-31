@@ -32,39 +32,40 @@ public class forgotten_password extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        fid = new app.bolivia.swing.JCTextField();
+        fmail = new app.bolivia.swing.JCTextField();
         jLabel1 = new javax.swing.JLabel();
         pass = new rojerusan.RSPasswordTextPlaceHolder();
         back = new java.awt.Button();
         reset1 = new java.awt.Button();
+        jLabel4 = new javax.swing.JLabel();
+        fid = new app.bolivia.swing.JCTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(850, 160));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(687, 448));
         setSize(new java.awt.Dimension(800, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel2.setText("Username");
+        jLabel2.setText("Mail-ID");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, 40));
 
-        fid.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        fid.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        fid.setPlaceholder("Enter the Username");
-        getContentPane().add(fid, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 220, 40));
+        fmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        fmail.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        fmail.setPlaceholder("Enter Mail id");
+        getContentPane().add(fmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 220, 40));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setText("Password");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, -1, 40));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, 40));
 
         pass.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         pass.setForeground(new java.awt.Color(0, 0, 0));
         pass.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         pass.setPhColor(new java.awt.Color(0, 0, 0));
-        pass.setPlaceholder("Enter the Password");
-        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 220, 40));
+        pass.setPlaceholder("Enter New Password");
+        getContentPane().add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 220, 40));
 
         back.setBackground(new java.awt.Color(0, 102, 255));
         back.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -74,7 +75,7 @@ public class forgotten_password extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 190, 40));
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 190, 40));
 
         reset1.setBackground(new java.awt.Color(0, 102, 255));
         reset1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -84,11 +85,20 @@ public class forgotten_password extends javax.swing.JFrame {
                 reset1ActionPerformed(evt);
             }
         });
-        getContentPane().add(reset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 190, 40));
+        getContentPane().add(reset1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 240, 190, 40));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel4.setText("Username");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, 40));
+
+        fid.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        fid.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        fid.setPlaceholder("Enter the Username");
+        getContentPane().add(fid, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 220, 40));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Untitled.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 690, 450));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -102,13 +112,14 @@ public class forgotten_password extends javax.swing.JFrame {
         // TODO add your handling code here:
         String Pass=pass.getText();
         String Fid=fid.getText();
+        String Fmail=fmail.getText();
         try
         {
               Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/pinkbook","root","admin");
             Statement st=con.createStatement();
-            st.executeUpdate("update faculty set fpassword='"+Pass+"' where fid='"+Fid+"'");
-             JOptionPane.showMessageDialog(null, "Successfully Updated");
+            st.executeUpdate("update faculty set fpassword='"+Pass+"' where fid='"+Fid+"' and fmail='"+Fmail+"'");
+             JOptionPane.showMessageDialog(null, "password changed Successfully");
              dispose();
         }
         catch(Exception e)
@@ -157,9 +168,11 @@ public class forgotten_password extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button back;
     private app.bolivia.swing.JCTextField fid;
+    private app.bolivia.swing.JCTextField fmail;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private rojerusan.RSPasswordTextPlaceHolder pass;
     private java.awt.Button reset1;
     // End of variables declaration//GEN-END:variables

@@ -139,7 +139,7 @@ public class stu_add extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setRowHeight(30);
+        jTable2.setRowHeight(25);
         jTable2.setRowSelectionAllowed(false);
         jTable2.setShowGrid(true);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -223,14 +223,31 @@ public class stu_add extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+         int Year1=Integer.parseInt(String.valueOf(year.getSelectedItem()));
+        int Sem1=Integer.parseInt(String.valueOf(sem.getSelectedItem()));
+        int div=0;
+        if(Year1==1 ||  Year1==2 || Year1==3)
+            div=800;
+        else if(Year1==4 && Sem1==7)
+            div=500;
+        else if(Year1==4 && Sem1==8)
+            div=200;
         DefaultTableModel dtm=(DefaultTableModel) jTable2.getModel(); 
          if(dtm.getRowCount()==0)
          {
              JOptionPane.showMessageDialog(null, "Table is Empty");
          }
-         else if(dtm.getRowCount()<8)
+         else if( Year1==1 ||  Year1==2 || Year1==3 && (dtm.getRowCount()<8))
          {
              JOptionPane.showMessageDialog(null, "Please Enter all eight subject Marks");
+         }
+         else if( Year1==4 && Sem1==8 && (dtm.getRowCount()<2))
+         {
+             JOptionPane.showMessageDialog(null, "Please Enter all two subject Marks");
+         }
+           else if( Year1==4 && Sem1==7 && (dtm.getRowCount()<5))
+         {
+             JOptionPane.showMessageDialog(null, "Please Enter all five subject Marks");
          }
          else
          {
@@ -238,7 +255,7 @@ public class stu_add extends javax.swing.JFrame {
              {
              Class.forName("com.mysql.jdbc.Driver");
              Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/pinkbook","root","admin");
-      String Sid=sesid.getText();
+             String Sid=sesid.getText();
              String Year=(String)year.getSelectedItem();
              String Sem=(String)sem.getSelectedItem();
        
@@ -247,19 +264,13 @@ public class stu_add extends javax.swing.JFrame {
              {
                  String Sbcode=dtm.getValueAt(i, 0).toString();    
                  int Cie1=Integer.parseInt(dtm.getValueAt(i, 1).toString());
-                
-                 
                  int Cie2=Integer.parseInt(dtm.getValueAt(i, 2).toString());
-                  
                  int Cie3=Integer.parseInt(dtm.getValueAt(i, 3).toString());
                  dtm.setValueAt(((Cie1+Cie2+Cie3)/3), i, 4);
                  int Inter=Integer.parseInt(dtm.getValueAt(i, 4).toString());
                  int Exter=Integer.parseInt(dtm.getValueAt(i, 5).toString());
-                   
                  dtm.setValueAt(Inter+Exter+10, i, 6);
                  int Tot=Integer.parseInt(dtm.getValueAt(i, 6).toString());
-                 
-                 
                  String sql="insert into marks values(?,?,?,?,?,?,?,?,?,?)";
                   PreparedStatement psmt=con.prepareStatement(sql);
                   psmt.setString(1, Sid);
@@ -287,7 +298,6 @@ public class stu_add extends javax.swing.JFrame {
              double Sum1=0.00,percentage=0.00;  
         try
         {
-           
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/pinkbook","root","admin");
             PreparedStatement psmt1=con.prepareStatement("select sum(total) from marks where usn='"+Sid+"' and year='"+Year+"' and sem='"+Sem+"'");
@@ -295,10 +305,8 @@ public class stu_add extends javax.swing.JFrame {
             if(rs1.next())
             {
                 Sum1=rs1.getInt(1);
-                percentage=(Sum1/800)*100;
-              
+                percentage=(Sum1/div)*100;
             }
-            
         }
         catch(Exception e1)
         {
@@ -317,14 +325,12 @@ public class stu_add extends javax.swing.JFrame {
                   psmt.setString(5,"null");
                   psmt.execute();
                   JOptionPane.showMessageDialog(null, "You can go to makslist and check persentage and result");
-               
-               
            }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, e);
         }
-         }
+       }
 
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -369,11 +375,11 @@ public class stu_add extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "You can Add only Five Subject Marks for Selected Sem and Year");
         }
-         if(Year==4 && Sem==8 && dtm.getRowCount()>1 )
+        else if(Year==4 && Sem==8 && dtm.getRowCount()>1 )
         {
             JOptionPane.showMessageDialog(null, "You can Add only two Subject Marks for Selected Sem and Year");
         }
-          if(Year==1 || Year==2 || Year==3  && dtm.getRowCount()>4 )
+        else  if(Year==1 || Year==2 || Year==3  && dtm.getRowCount()>4 )
         {
             JOptionPane.showMessageDialog(null, "You can Add only Five Subject Marks for Selected Sem and Year");
         }
@@ -423,10 +429,8 @@ public class stu_add extends javax.swing.JFrame {
                  }
                      
         
-           
 
-       
-        
+     
         } 
         
         

@@ -98,6 +98,7 @@ public class teach_mentees extends javax.swing.JFrame {
                 "USN", "NAME", "PASSWORD", "MAIL", "PHONE", "ADDRESS", "GENDER", "DOB"
             }
         ));
+        jTable1.setRowHeight(25);
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
 

@@ -87,6 +87,7 @@ public class teach_internship extends javax.swing.JFrame {
                 "USN", "Internship Name", "Internship Period", "Certificate", "AICIT Activity"
             }
         ));
+        jTable1.setRowHeight(25);
         jTable1.setShowGrid(true);
         jScrollPane3.setViewportView(jTable1);
 
